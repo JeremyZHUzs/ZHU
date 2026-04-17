@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jer Z | Architecture & Law</title>
+    <style>
+        /* ================= 基础承重墙 ================= */
+        :root { --bg-color: #ffffff; --text-color: #1a1a1a; --accent-color: #666666; --border-color: #eeeeee; --sidebar-width: 300px; }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; margin: 0; padding: 0; }
+        
+        /* 双语控制系统 */
+        body.lang-zh .en-only { display: none !important; }
+        body.lang-en .zh-only { display: none !important; }
+
+        /* 顶部导航 (5个房间入口) */
+        .top-nav { position: fixed; top: 0; right: 0; left: 0; height: 60px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); display: flex; justify-content: flex-end; align-items: center; padding: 0 40px; z-index: 9999; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-size: 14px; font-weight: 500; margin-left: 25px; transition: color 0.2s; }
+        /* 智能高亮样式 */
+        .nav-links a:hover, .nav-links a.active { color: #000; border-bottom: 2px solid #000; padding-bottom: 4px; }
+        .lang-toggle { background: #000; color: #fff; border: none; padding: 6px 15px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: 30px; }
+
+        /* 左侧名片 */
+        .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
+        .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #f0f0f0; margin-bottom: 25px; object-fit: cover; }
+        .sidebar h1 { font-size: 26px; margin: 0 0 10px; }
+        .sidebar .role { font-size: 14px; color: var(--accent-color); margin-bottom: 20px; font-weight: 500; }
+        .sidebar .bio-text { font-size: 13.5px; color: var(--accent-color); margin-bottom: 35px; text-align: justify; }
+        .contact-info { font-size: 13px; }
+        .contact-info div { margin-bottom: 10px; }
+        .contact-info a { color: var(--text-color); text-decoration: none; border-bottom: 1px solid var(--border-color); }
+
+        /* 右侧展陈区 (所有房间的内容都在这里) */
+        .main-content { margin-left: var(--sidebar-width); padding: 100px 60px 80px 60px; max-width: 800px; }
+        
+        /* 内部排版通用件 */
+        .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888; margin: 0 0 35px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+        .intro-text { font-size: 16px; line-height: 1.8; margin-bottom: 40px; }
+        .timeline-item { margin-bottom: 45px; }
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+        .item-title { font-weight: 600; font-size: 16px; }
+        .item-date { font-size: 13px; color: var(--accent-color); font-family: monospace; }
+        .item-role { font-size: 14px; color: var(--accent-color); font-style: italic; margin-bottom: 12px; }
+        .item-desc { font-size: 14.5px; }
+        .item-desc ul { padding-left: 18px; margin-top: 8px; margin-bottom: 0; }
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px; }
+        .project-card { border: 1px solid var(--border-color); text-decoration: none; color: inherit; transition: transform 0.2s ease; display: block; }
+        .project-card:hover { transform: translateY(-4px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .project-img { width: 100%; height: 220px; object-fit: cover; background: #f9f9f9; display: block; border-bottom: 1px solid var(--border-color); }
+        .project-info { padding: 16px; }
+        .project-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .project-tag { font-size: 12.5px; color: var(--accent-color); }
+
+        @media (max-width: 900px) {
+            .sidebar { position: relative; width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 90px 30px 40px; }
+            .main-content { margin-left: 0; padding: 50px 30px; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="lang-zh">
+
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="index.html" class="zh-only">主页</a>
+            <a href="cv.html" class="zh-only">履历</a>
+            <a href="projects.html" class="zh-only">项目</a>
+            <a href="misc.html" class="zh-only">杂项</a>
+            <a href="support.html" class="zh-only">技术支持</a>
+            
+            <a href="index.html" class="en-only">Home</a>
+            <a href="cv.html" class="en-only">CV</a>
+            <a href="projects.html" class="en-only">Projects</a>
+            <a href="misc.html" class="en-only">Misc</a>
+            <a href="support.html" class="en-only">Support</a>
+            
+            <button class="lang-toggle" onclick="toggleLanguage()" id="lang-btn">EN</button>
+        </div>
+    </nav>
+
+    <aside class="sidebar">
+        <img src="assets/images/avatar.jpg" alt="Avatar" class="avatar" onerror="this.style.display='none'">
+        <h1>Jer Z</h1>
+        <div class="role zh-only">建筑设计师 / 准建筑律师</div>
+        <div class="role en-only">Architectural Designer / Future Lawyer</div>
+        <div class="bio-text zh-only">倾向于将建筑视为战略性的思辨工具，围绕系统性结构、海岸系统与废弃基础设施展开探索。</div>
+        <div class="bio-text en-only">Viewing architecture as a strategic tool, exploring systematic structures, coastal systems, and abandoned infrastructure.</div>
+        <div class="contact-info">
+            <div>📍 Hangzhou, China</div>
+            <div>✉️ <a href="mailto:jeremyzhuzs@outlook.com">Email</a></div>
+            <div>🔗 <a href="https://github.com/JeremyZHUzs" target="_blank">GitHub</a></div>
+        </div>
+    </aside>
+
+<main class="main-content">
+        <h2 class="section-title zh-only">精选项目</h2>
+        <h2 class="section-title en-only">Selected Projects</h2>
+        
+        <div class="project-grid">
+            <a href="#" class="project-card">
+                <img src="assets/images/project1.jpg" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop'">
+                <div class="project-info zh-only">
+                    <div class="project-name">dasso 结构建材研究</div><div class="project-tag">供应链 / 材料研发</div>
+                </div>
+                <div class="project-info en-only">
+                    <div class="project-name">dasso Structural Materials</div><div class="project-tag">Supply Chain / Material R&D</div>
+                </div>
+            </a>
+            
+            <a href="#" class="project-card">
+                <img src="assets/images/project2.jpg" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop'">
+                <div class="project-info zh-only">
+                    <div class="project-name">义乌西江悦工程</div><div class="project-tag">施工统筹 / 实测实量</div>
+                </div>
+                <div class="project-info en-only">
+                    <div class="project-name">Yiwu Xijiangyue Site</div><div class="project-tag">On-Site Management</div>
+                </div>
+            </a>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 智能高亮当前房间的菜单
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 2. 跨房间记忆中英文
+            const savedLang = localStorage.getItem('siteLang') || 'zh';
+            const btn = document.getElementById('lang-btn');
+            if (savedLang === 'en') {
+                document.body.classList.remove('lang-zh');
+                document.body.classList.add('lang-en');
+                btn.textContent = '中文';
+            }
+        });
+
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-btn');
+            if (body.classList.contains('lang-zh')) {
+                body.classList.replace('lang-zh', 'lang-en');
+                btn.textContent = '中文';
+                localStorage.setItem('siteLang', 'en');
+            } else {
+                body.classList.replace('lang-en', 'lang-zh');
+                btn.textContent = 'EN';
+                localStorage.setItem('siteLang', 'zh');
+            }
+        }
+    </script>
+</body>
+</html>
