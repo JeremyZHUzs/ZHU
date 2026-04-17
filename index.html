@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jer Z | Architecture & Law</title>
+    <title>朱泽生 | Jeremy ZHU</title>
     <style>
         /* ================= 全局暗黑视觉引擎 ================= */
         :root { 
@@ -26,62 +26,40 @@
         .nav-links a:hover, .nav-links a.active { color: #ffffff; border-bottom: 2px solid #ffffff; padding-bottom: 4px; }
         
         /* 切换按钮反转为白色 */
-        .lang-toggle { background: #ffffff; color: #000000; border: none; padding: 6px 15px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: 30px; transition: opacity 0.2s; }
-        .lang-toggle:hover { opacity: 0.8; }
+        .lang-toggle { background: #ffffff; color: #000000; border: none; padding: 6px 15px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: 30px; }
 
         /* 左侧名片 */
         .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
-        .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #333333; margin-bottom: 25px; object-fit: cover; }
+        .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #333333; margin-bottom: 25px; object-fit: cover; border: 1px solid var(--border-color); }
         .sidebar h1 { font-size: 26px; margin: 0 0 10px; color: #ffffff; letter-spacing: -0.5px;}
         .sidebar .role { font-size: 14px; color: var(--accent-color); margin-bottom: 20px; font-weight: 500; }
         .sidebar .bio-text { font-size: 13.5px; color: var(--accent-color); margin-bottom: 35px; text-align: justify; }
         .contact-info { font-size: 13px; }
         .contact-info div { margin-bottom: 10px; }
-        .contact-info a { color: var(--text-color); text-decoration: none; border-bottom: 1px solid var(--border-color); transition: color 0.2s; }
-        .contact-info a:hover { color: #ffffff; border-color: #ffffff; }
+        .contact-info a { color: var(--text-color); text-decoration: none; border-bottom: 1px solid var(--border-color); }
 
-        /* 右侧展陈区 */
+        /* 右侧内容区 */
         .main-content { margin-left: var(--sidebar-width); padding: 100px 60px 80px 60px; max-width: 800px; }
-        
-        /* 内部排版通用件 (暗黑适配) */
         .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888888; margin: 0 0 35px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
         .intro-text { font-size: 16px; line-height: 1.8; margin-bottom: 40px; color: #cccccc; }
-        .timeline-item { margin-bottom: 45px; }
-        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
-        .item-title { font-weight: 600; font-size: 16px; color: #ffffff; }
-        .item-date { font-size: 13px; color: var(--accent-color); font-family: monospace; }
-        .item-role { font-size: 14px; color: var(--accent-color); font-style: italic; margin-bottom: 12px; }
-        .item-desc { font-size: 14.5px; color: #cccccc; }
-        .item-desc ul { padding-left: 18px; margin-top: 8px; margin-bottom: 0; }
-        
-        /* 项目画廊 (暗黑适配) */
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px; }
-        .project-card { border: 1px solid var(--border-color); text-decoration: none; color: inherit; transition: transform 0.2s ease, box-shadow 0.2s ease; display: block; background: #1a1a1a; }
-        .project-card:hover { transform: translateY(-4px); box-shadow: 0 4px 20px rgba(0,0,0,0.5); border-color: #444444; }
-        .project-img { width: 100%; height: 220px; object-fit: cover; background: #222222; display: block; border-bottom: 1px solid var(--border-color); }
-        .project-info { padding: 16px; }
-        .project-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: #ffffff; }
-        .project-tag { font-size: 12.5px; color: var(--accent-color); }
 
-        /* 移动端适配 */
         @media (max-width: 900px) {
             .sidebar { position: relative; width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 90px 30px 40px; }
             .main-content { margin-left: 0; padding: 50px 30px; }
-            .project-grid { grid-template-columns: 1fr; }
         }
     </style>
-    </head>
+</head>
 <body class="lang-zh">
 
     <nav class="top-nav">
         <div class="nav-links">
-            <a href="index.html" class="zh-only">主页</a>
+            <a href="index.html" class="zh-only active">主页</a>
             <a href="cv.html" class="zh-only">履历</a>
             <a href="projects.html" class="zh-only">项目</a>
             <a href="misc.html" class="zh-only">杂项</a>
             <a href="support.html" class="zh-only">技术支持</a>
             
-            <a href="index.html" class="en-only">Home</a>
+            <a href="index.html" class="en-only active">Home</a>
             <a href="cv.html" class="en-only">CV</a>
             <a href="projects.html" class="en-only">Projects</a>
             <a href="misc.html" class="en-only">Misc</a>
@@ -91,8 +69,8 @@
         </div>
     </nav>
 
-   <aside class="sidebar">
-        <img src="assets/images/avatar.jpg" alt="Avatar" class="avatar" onerror="this.style.display='none'">
+    <aside class="sidebar">
+        <img src="assets/images/avatar.jpg" alt="朱泽生" class="avatar" onerror="this.style.display='none'">
         
         <h1 class="zh-only">朱泽生</h1>
         <h1 class="en-only">Jeremy ZHU</h1>
@@ -111,31 +89,21 @@
     </aside>
 
     <main class="main-content">
-        <h2 class="section-title zh-only">关于我</h2>
+        <h2 class="section-title zh-only">关于我 / About</h2>
         <h2 class="section-title en-only">About Me</h2>
         
         <div class="intro-text zh-only">
-            我是一名具备跨学科背景的专业人士，深耕于建筑设计、建材供应链管理与工程现场统筹。<br><br>
-            现阶段我的核心重心在于将深厚的工程实践经验转化为战略性资本，目标是在不久的将来全面切入法务与合规领域，专注解决国际建筑工程中的复杂法律争议。<br><br>
-            欢迎通过左侧的邮件或 GitHub 与我取得联系。
+            我是一名具备建筑学背景的专业人士。基于丰富的多学科背景，我的远期规划是转型深耕，成为一名专注国际建筑工程合规与争议解决的建筑律师。<br><br>
+            目前的展厅正处于模块化构建阶段，你可以通过上方导航查阅我的履历与精选项目。
         </div>
         <div class="intro-text en-only">
-            I am an architectural professional with a multidisciplinary background spanning architectural design, supply chain management, and on-site construction execution.<br><br>
-            My current objective is to leverage this profound engineering foundation to transition into the legal sector, specializing in global construction compliance and dispute resolution.<br><br>
-            Feel free to contact me via email or GitHub.
+            I am an architectural professional with a multidisciplinary background. My long-term objective is to transition into the legal sector, specializing in global construction compliance and dispute resolution.<br><br>
+            This digital portfolio is currently under modular construction. You can explore my experience and projects via the navigation menu above.
         </div>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. 智能高亮当前房间的菜单
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-
-            // 2. 跨房间记忆中英文
             const savedLang = localStorage.getItem('siteLang') || 'zh';
             const btn = document.getElementById('lang-btn');
             if (savedLang === 'en') {
