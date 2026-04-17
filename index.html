@@ -31,22 +31,21 @@
         /* 左侧名片 */
         .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
         /* ================= 头像：更大、方形圆边 ================= */
+        /* ================= 头像：重塑比例与质感 ================= */
         .avatar { 
-            width: 180px;         /* 1. 放大一些：从 85px 增加到 180px */
-            height: 180px;        /* 保持 1:1 比例 */
+            width: 140px;         /* 1. 缩小尺寸：退回到 140px，恢复侧边栏的呼吸感 */
+            height: 140px;        
+            border-radius: 24px;  /* 2. 增加圆角：24px 更加接近现代 iOS 图标的平滑曲率 */
+            object-fit: cover;    
             
-            /* 2. 方形圆边：将 50% (圆形) 改为具体的像素值 (圆角) */
-            border-radius: 15px;  /* 获得精致的圆角效果 */
-
-            object-fit: cover;    /* 确保照片不拉伸 */
-            border: 1px solid var(--border-color);
-            background-color: #333333; /* 备用色 */
+            /* 3. 边缘处理：用深色边框和深色阴影，压住白底的边缘，让照片“浮”在页面上而不是生硬地贴着 */
+            border: 1px solid #333333; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); 
             
-            /* 居中显示较大头像 */
             display: block;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 25px; /* 下方留白保持不变 */
+            margin-bottom: 25px; 
         }
         .sidebar h1 { font-size: 26px; margin: 0 0 10px; color: #ffffff; letter-spacing: -0.5px;}
         .sidebar .role { font-size: 14px; color: var(--accent-color); margin-bottom: 20px; font-weight: 500; }
