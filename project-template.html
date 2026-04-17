@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱泽生 | 项目详情</title>
+    <style>
+        /* 全局暗黑视觉引擎 (与主页保持一致) */
+        :root { --bg-color: #121212; --text-color: #e0e0e0; --accent-color: #888888; --border-color: #2a2a2a; --sidebar-width: 300px; }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s; }
+        
+        body.lang-zh .en-only { display: none !important; }
+        body.lang-en .zh-only { display: none !important; }
+
+        .top-nav { position: fixed; top: 0; right: 0; left: 0; height: 60px; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); display: flex; justify-content: flex-end; align-items: center; padding: 0 40px; z-index: 9999; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-size: 14px; font-weight: 500; margin-left: 25px; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #ffffff; border-bottom: 2px solid #ffffff; padding-bottom: 4px; }
+        .lang-toggle { background: #ffffff; color: #000000; border: none; padding: 6px 15px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: 30px; transition: opacity 0.2s; }
+        .lang-toggle:hover { opacity: 0.8; }
+
+        .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
+        .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #333333; margin-bottom: 25px; object-fit: cover; }
+        
+        .main-content { margin-left: var(--sidebar-width); padding: 100px 60px 80px 60px; max-width: 800px; }
+        .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888888; margin: 0 0 35px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+        .intro-text { font-size: 15px; line-height: 1.8; margin-bottom: 40px; color: #cccccc; text-align: justify;}
+        
+        @media (max-width: 900px) {
+            .sidebar { position: relative; width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 90px 30px 40px; }
+            .main-content { margin-left: 0; padding: 50px 30px; }
+        }
+    </style>
+</head>
+<body class="lang-zh">
+
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="index.html" class="zh-only">主页</a>
+            <a href="projects.html" class="zh-only active">项目</a>
+            <a href="misc.html" class="zh-only">杂项</a>
+            
+            <a href="index.html" class="en-only">Home</a>
+            <a href="projects.html" class="en-only active">Projects</a>
+            <a href="misc.html" class="en-only">Misc</a>
+            
+            <button class="lang-toggle" onclick="toggleLanguage()" id="lang-btn">EN</button>
+        </div>
+    </nav>
+
+    <aside class="sidebar">
+        <img src="assets/images/avatar.jpg" alt="Avatar" class="avatar" onerror="this.style.display='none'">
+        <h1 class="zh-only" style="font-size: 20px; margin: 0 0 5px 0; color: #ffffff;">朱泽生</h1>
+        <h1 class="en-only" style="font-size: 20px; margin: 0 0 5px 0; color: #ffffff;">Jeremy ZHU</h1>
+
+        <a href="projects.html" class="zh-only" style="font-size: 13px; color: var(--accent-color); text-decoration: none; display: block; margin-bottom: 40px; transition: color 0.2s;">← 返回项目列表</a>
+        <a href="projects.html" class="en-only" style="font-size: 13px; color: var(--accent-color); text-decoration: none; display: block; margin-bottom: 40px; transition: color 0.2s;">← Back to Projects</a>
+
+        <div class="zh-only" style="font-size: 12px; font-weight: 700; color: #666; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">文档目录</div>
+        <div class="en-only" style="font-size: 12px; font-weight: 700; color: #666; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Contents</div>
+
+        <ul class="zh-only" style="list-style: none; padding: 0; margin: 0; font-size: 13.5px; line-height: 2.2;">
+            <li><a href="#ch1" style="color: var(--text-color); text-decoration: none;">01. 项目背景</a></li>
+            <li><a href="#ch2" style="color: var(--text-color); text-decoration: none;">02. 核心挑战</a></li>
+            <li><a href="#ch3" style="color: var(--text-color); text-decoration: none;">03. 解决方案</a></li>
+        </ul>
+
+        <ul class="en-only" style="list-style: none; padding: 0; margin: 0; font-size: 13.5px; line-height: 2.2;">
+            <li><a href="#ch1" style="color: var(--text-color); text-decoration: none;">01. Background</a></li>
+            <li><a href="#ch2" style="color: var(--text-color); text-decoration: none;">02. Challenges</a></li>
+            <li><a href="#ch3" style="color: var(--text-color); text-decoration: none;">03. Solutions</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <h2 class="zh-only" style="font-size: 28px; margin-bottom: 40px; color: #fff;">[这里填入：项目名称]</h2>
+        <h2 class="en-only" style="font-size: 28px; margin-bottom: 40px; color: #fff;">[Project Title Here]</h2>
+
+        <div id="ch1" style="margin-bottom: 60px; scroll-margin-top: 80px;">
+            <h3 class="section-title zh-only">01. 项目背景</h3>
+            <h3 class="section-title en-only">01. Background</h3>
+            <div class="intro-text zh-only">在这里填入中文的项目背景描述...</div>
+            <div class="intro-text en-only">Enter English background description here...</div>
+            
+            <div style="width: 100%; height: 300px; background: #1a1a1a; border: 1px dashed #444; display: flex; align-items: center; justify-content: center; color: #666; margin-bottom: 20px;">
+                [图纸/照片预留位 1]
+            </div>
+        </div>
+
+        <div id="ch2" style="margin-bottom: 60px; scroll-margin-top: 80px;">
+            <h3 class="section-title zh-only">02. 核心挑战</h3>
+            <h3 class="section-title en-only">02. Challenges</h3>
+            <div class="intro-text zh-only">在这里填入中文的核心挑战分析...</div>
+            <div class="intro-text en-only">Enter English challenges analysis here...</div>
+            
+            <div style="width: 100%; height: 300px; background: #1a1a1a; border: 1px dashed #444; display: flex; align-items: center; justify-content: center; color: #666; margin-bottom: 20px;">
+                [图纸/照片预留位 2]
+            </div>
+        </div>
+
+        <div id="ch3" style="margin-bottom: 60px; scroll-margin-top: 80px;">
+            <h3 class="section-title zh-only">03. 解决方案</h3>
+            <h3 class="section-title en-only">03. Solutions</h3>
+            <div class="intro-text zh-only">在这里填入中文的图纸与文字说明...</div>
+            <div class="intro-text en-only">Enter English explanations and drawings here...</div>
+            
+            <div style="width: 100%; height: 300px; background: #1a1a1a; border: 1px dashed #444; display: flex; align-items: center; justify-content: center; color: #666; margin-bottom: 20px;">
+                [图纸/照片预留位 3]
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('siteLang') || 'zh';
+            const btn = document.getElementById('lang-btn');
+            if (savedLang === 'en') {
+                document.body.classList.remove('lang-zh');
+                document.body.classList.add('lang-en');
+                btn.textContent = '中文';
+            }
+        });
+
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-btn');
+            if (body.classList.contains('lang-zh')) {
+                body.classList.replace('lang-zh', 'lang-en');
+                btn.textContent = '中文';
+                localStorage.setItem('siteLang', 'en');
+            } else {
+                body.classList.replace('lang-en', 'lang-zh');
+                btn.textContent = 'EN';
+                localStorage.setItem('siteLang', 'zh');
+            }
+        }
+    </script>
+</body>
+</html>
