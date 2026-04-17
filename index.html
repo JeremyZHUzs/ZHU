@@ -5,130 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jer Z | Architecture & Law</title>
     <style>
-        /* ================= 基础视觉系统 ================= */
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #1a1a1a;
-            --accent-color: #666666;
-            --border-color: #eeeeee;
-            --sidebar-width: 300px;
-        }
+        /* ================= 基础承重墙 ================= */
+        :root { --bg-color: #ffffff; --text-color: #1a1a1a; --accent-color: #666666; --border-color: #eeeeee; --sidebar-width: 300px; }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; margin: 0; padding: 0; }
         
-        /* 开启丝滑滚动体验 */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
-
-        /* ================= 核心：双语显示控制逻辑 ================= */
-        /* 默认中文状态：隐藏英文 */
+        /* 双语控制系统 */
         body.lang-zh .en-only { display: none !important; }
-        /* 英文状态：隐藏中文 */
         body.lang-en .zh-only { display: none !important; }
 
-        /* ================= 顶部导航系统 ================= */
-        .top-nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 0 40px;
-            z-index: 9999; /* 极高层级，确保按钮绝对能被按到 */
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 14px;
-            font-weight: 500;
-            margin-left: 25px;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--accent-color); }
+        /* 顶部导航 (5个房间入口) */
+        .top-nav { position: fixed; top: 0; right: 0; left: 0; height: 60px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); display: flex; justify-content: flex-end; align-items: center; padding: 0 40px; z-index: 9999; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-size: 14px; font-weight: 500; margin-left: 25px; transition: color 0.2s; }
+        /* 智能高亮样式 */
+        .nav-links a:hover, .nav-links a.active { color: #000; border-bottom: 2px solid #000; padding-bottom: 4px; }
+        .lang-toggle { background: #000; color: #fff; border: none; padding: 6px 15px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: 30px; }
 
-        .lang-toggle {
-            background: #000;
-            color: #fff;
-            border: none;
-            padding: 6px 15px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 3px;
-            margin-left: 30px;
-            transition: opacity 0.2s;
-        }
-        .lang-toggle:hover { opacity: 0.8; }
-
-        /* ================= 左侧稳固基石 (Sidebar) ================= */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: var(--sidebar-width);
-            padding: 100px 40px 40px;
-            border-right: 1px solid var(--border-color);
-            overflow-y: auto;
-            box-sizing: border-box;
-        }
-        .avatar {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-            margin-bottom: 25px;
-            object-fit: cover;
-        }
-        .sidebar h1 { font-size: 26px; margin: 0 0 10px; letter-spacing: -0.5px; }
+        /* 左侧名片 */
+        .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
+        .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #f0f0f0; margin-bottom: 25px; object-fit: cover; }
+        .sidebar h1 { font-size: 26px; margin: 0 0 10px; }
         .sidebar .role { font-size: 14px; color: var(--accent-color); margin-bottom: 20px; font-weight: 500; }
         .sidebar .bio-text { font-size: 13.5px; color: var(--accent-color); margin-bottom: 35px; text-align: justify; }
-        
         .contact-info { font-size: 13px; }
         .contact-info div { margin-bottom: 10px; }
-        .contact-info a { color: var(--text-color); text-decoration: none; border-bottom: 1px solid var(--border-color); padding-bottom: 2px;}
+        .contact-info a { color: var(--text-color); text-decoration: none; border-bottom: 1px solid var(--border-color); }
 
-        /* ================= 右侧核心展陈区 ================= */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 100px 60px 80px 60px;
-            max-width: 800px;
-        }
-
-        /* 锚点偏移：防止导航栏遮挡标题 */
-        section { scroll-margin-top: 90px; }
-
-        /* 排版组件 */
-        .section-title {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #888;
-            margin: 0 0 35px 0;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-        }
+        /* 右侧展陈区 (所有房间的内容都在这里) */
+        .main-content { margin-left: var(--sidebar-width); padding: 100px 60px 80px 60px; max-width: 800px; }
         
+        /* 内部排版通用件 */
+        .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888; margin: 0 0 35px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+        .intro-text { font-size: 16px; line-height: 1.8; margin-bottom: 40px; }
         .timeline-item { margin-bottom: 45px; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
         .item-title { font-weight: 600; font-size: 16px; }
@@ -136,22 +44,17 @@
         .item-role { font-size: 14px; color: var(--accent-color); font-style: italic; margin-bottom: 12px; }
         .item-desc { font-size: 14.5px; }
         .item-desc ul { padding-left: 18px; margin-top: 8px; margin-bottom: 0; }
-        .item-desc li { margin-bottom: 6px; }
-
-        /* 画廊网格 */
         .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px; }
         .project-card { border: 1px solid var(--border-color); text-decoration: none; color: inherit; transition: transform 0.2s ease; display: block; }
-        .project-card:hover { transform: translateY(-4px); }
+        .project-card:hover { transform: translateY(-4px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .project-img { width: 100%; height: 220px; object-fit: cover; background: #f9f9f9; display: block; border-bottom: 1px solid var(--border-color); }
         .project-info { padding: 16px; }
         .project-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
         .project-tag { font-size: 12.5px; color: var(--accent-color); }
 
-        /* ================= 移动端适配 ================= */
         @media (max-width: 900px) {
             .sidebar { position: relative; width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 90px 30px 40px; }
             .main-content { margin-left: 0; padding: 50px 30px; }
-            .top-nav { padding: 0 20px; }
             .project-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -160,14 +63,17 @@
 
     <nav class="top-nav">
         <div class="nav-links">
-            <a href="#experience" class="zh-only">履历</a>
-            <a href="#projects" class="zh-only">项目</a>
-            <a href="#misc" class="zh-only">杂项</a>
-            <a href="#spare" class="zh-only">备用</a>
-            <a href="#experience" class="en-only">CV</a>
-            <a href="#projects" class="en-only">Projects</a>
-            <a href="#misc" class="en-only">Misc</a>
-            <a href="#spare" class="en-only">Spare</a>
+            <a href="index.html" class="zh-only">主页</a>
+            <a href="cv.html" class="zh-only">履历</a>
+            <a href="projects.html" class="zh-only">项目</a>
+            <a href="misc.html" class="zh-only">杂项</a>
+            <a href="support.html" class="zh-only">技术支持</a>
+            
+            <a href="index.html" class="en-only">Home</a>
+            <a href="cv.html" class="en-only">CV</a>
+            <a href="projects.html" class="en-only">Projects</a>
+            <a href="misc.html" class="en-only">Misc</a>
+            <a href="support.html" class="en-only">Support</a>
             
             <button class="lang-toggle" onclick="toggleLanguage()" id="lang-btn">EN</button>
         </div>
@@ -176,17 +82,10 @@
     <aside class="sidebar">
         <img src="assets/images/avatar.jpg" alt="Avatar" class="avatar" onerror="this.style.display='none'">
         <h1>Jer Z</h1>
-        
         <div class="role zh-only">建筑设计师 / 准建筑律师</div>
         <div class="role en-only">Architectural Designer / Future Lawyer</div>
-        
-        <div class="bio-text zh-only">
-            倾向于将建筑视为战略性的思辨工具，围绕系统性结构、海岸系统与废弃基础设施展开探索。
-        </div>
-        <div class="bio-text en-only">
-            Viewing architecture as a strategic tool, exploring systematic structures, coastal systems, and abandoned infrastructure.
-        </div>
-        
+        <div class="bio-text zh-only">倾向于将建筑视为战略性的思辨工具，围绕系统性结构、海岸系统与废弃基础设施展开探索。</div>
+        <div class="bio-text en-only">Viewing architecture as a strategic tool, exploring systematic structures, coastal systems, and abandoned infrastructure.</div>
         <div class="contact-info">
             <div>📍 Hangzhou, China</div>
             <div>✉️ <a href="mailto:jeremyzhuzs@outlook.com">Email</a></div>
@@ -195,152 +94,51 @@
     </aside>
 
     <main class="main-content">
+        <h2 class="section-title zh-only">关于我</h2>
+        <h2 class="section-title en-only">About Me</h2>
         
-        <section id="experience">
-            <h2 class="section-title zh-only">工作经历</h2>
-            <h2 class="section-title en-only">Experience</h2>
-
-            <div class="timeline-item">
-                <div class="item-header">
-                    <span class="item-title">dasso (大庄) | Hangzhou</span>
-                    <span class="item-date">2026.04 - Present</span>
-                </div>
-                <div class="item-role zh-only">建筑建材上游管理</div>
-                <div class="item-role en-only">Upstream Building Materials Management</div>
-                <div class="item-desc zh-only">深度切入建筑供应链，负责建材上游板块的业务跟进、结构研发统筹与体系管理。</div>
-                <div class="item-desc en-only">Deeply involved in the research, development, and supply chain management of the upstream building materials sector.</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="item-header">
-                    <span class="item-title zh-only">温州肯恩大学 校建部</span>
-                    <span class="item-title en-only">Wenzhou-Kean University | Construction Dept.</span>
-                </div>
-                <div class="item-role zh-only">建筑甲方项目管理</div>
-                <div class="item-role en-only">Client-Side Project Management</div>
-                <div class="item-desc zh-only">代表业主方利益，参与校园建设工程的统筹规划，精准协调设计需求与施工落地，把控项目全生命周期。</div>
-                <div class="item-desc en-only">Coordinated campus construction projects representing the client's interests, aligning design requirements with on-site execution.</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="item-header">
-                    <span class="item-title zh-only">浙江舜江集团</span>
-                    <span class="item-title en-only">Zhejiang Shunjian Group</span>
-                </div>
-                <div class="item-role zh-only">施工现场管理</div>
-                <div class="item-role en-only">On-Site Construction Management</div>
-                <div class="item-desc zh-only">驻扎义乌西江悦别墅区工程前线，深度参与并掌握建筑施工全流程运作及严格的现场实测实量规范。</div>
-                <div class="item-desc en-only">Participated in the construction management of the Yiwu Xijiangyue Villa project, acquiring robust front-line operational experience.</div>
-            </div>
-        </section>
-
-        <section id="projects" style="padding-top: 20px;">
-            <h2 class="section-title zh-only">精选项目</h2>
-            <h2 class="section-title en-only">Selected Projects</h2>
-            
-            <div class="project-grid">
-                <a href="#" class="project-card">
-                    <img src="assets/images/project1.jpg" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop'">
-                    <div class="project-info zh-only">
-                        <div class="project-name">dasso 结构建材系统研究</div>
-                        <div class="project-tag">供应链 / 材料研发</div>
-                    </div>
-                    <div class="project-info en-only">
-                        <div class="project-name">dasso Structural Materials</div>
-                        <div class="project-tag">Supply Chain / Material R&D</div>
-                    </div>
-                </a>
-                
-                <a href="#" class="project-card">
-                    <img src="assets/images/project2.jpg" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop'">
-                    <div class="project-info zh-only">
-                        <div class="project-name">义乌西江悦别墅区现场</div>
-                        <div class="project-tag">施工统筹 / 实测实量</div>
-                    </div>
-                    <div class="project-info en-only">
-                        <div class="project-name">Yiwu Xijiangyue Site</div>
-                        <div class="project-tag">On-Site Management</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section id="misc">
-            <h2 class="section-title zh-only">教育与学术背景</h2>
-            <h2 class="section-title en-only">Education & Background</h2>
-
-            <div class="timeline-item">
-                <div class="item-header">
-                    <span class="item-title zh-only">温州肯恩大学 (Wenzhou-Kean University)</span>
-                    <span class="item-title en-only">Wenzhou-Kean University (WKU)</span>
-                </div>
-                <div class="item-role zh-only">建筑学硕士 (M.Arch) | NAAB 国际认证</div>
-                <div class="item-role en-only">Master of Architecture (M.Arch) | NAAB Accredited</div>
-                <div class="item-desc zh-only">
-                    <ul>
-                        <li>历经 6 年严苛、完整的系统性建筑学教育体系。</li>
-                        <li>研究视角聚焦于宏观领域，善于利用叙事性与研究性写作深度探索未来空间形态。</li>
-                    </ul>
-                </div>
-                <div class="item-desc en-only">
-                    <ul>
-                        <li>Completed a comprehensive 6-year systematic architectural education.</li>
-                        <li>Graduated from a program formally accredited by the National Architectural Accrediting Board (NAAB).</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="item-header">
-                    <span class="item-title zh-only">战略规划与资质路线图</span>
-                    <span class="item-title en-only">Strategic Trajectory</span>
-                </div>
-                <div class="item-desc zh-only">
-                    <ul>
-                        <li><strong>工程双轨制：</strong> 并行筹备二级/一级建造师、二级/一级注册建筑师资质考核。</li>
-                        <li><strong>法律跨界 (核心目标)：</strong> 计划于 <strong>2026 年 8 月底</strong>前全面切入法务与合规领域，并锚定 <strong>2029 年 10 月</strong>的法律职业资格考试，目标成为处理国际工程争议的建筑法律专家。</li>
-                        <li><strong>多语言储备：</strong> 中文 (母语/Level 9)、英文 (专业工作/Level 6)，并持续拓展西班牙语与日语能力。</li>
-                    </ul>
-                </div>
-                <div class="item-desc en-only">
-                    <ul>
-                        <li><strong>Engineering Credentials:</strong> Concurrently preparing for Constructor and Registered Architect certifications.</li>
-                        <li><strong>Legal Transition:</strong> Strategically planning to secure a legal/compliance role by <strong>August 2026</strong> and sit for the National Uniform Legal Profession Qualification Examination in <strong>October 2029</strong>.</li>
-                        <li><strong>Languages:</strong> Chinese (Native/Level 9), English (Proficient/Level 6), Spanish & Japanese (Beginner/Level 1).</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="spare" style="margin-top: 40px;">
-            <h2 class="section-title zh-only">预留板块 (备用)</h2>
-            <h2 class="section-title en-only">Future Fragment (Spare)</h2>
-            
-            <div class="zh-only" style="color: var(--accent-color); font-size: 14px; font-style: italic; background: #f9f9f9; padding: 20px; border: 1px dashed var(--border-color);">
-                此板块为预留空间。未来可用于展示“建筑法律合规研究文章”、“日常思辨随笔”或“摄影记录”。当内容准备好后，直接替换此段文字即可。
-            </div>
-            <div class="en-only" style="color: var(--accent-color); font-size: 14px; font-style: italic; background: #f9f9f9; padding: 20px; border: 1px dashed var(--border-color);">
-                This is a designated placeholder section. It is reserved for future integration of legal research papers, speculative essays, or visual fragments.
-            </div>
-        </section>
-
+        <div class="intro-text zh-only">
+            我是一名具备跨学科背景的专业人士，深耕于建筑设计、建材供应链管理与工程现场统筹。<br><br>
+            现阶段我的核心重心在于将深厚的工程实践经验转化为战略性资本，目标是在不久的将来全面切入法务与合规领域，专注解决国际建筑工程中的复杂法律争议。<br><br>
+            欢迎通过左侧的邮件或 GitHub 与我取得联系。
+        </div>
+        <div class="intro-text en-only">
+            I am an architectural professional with a multidisciplinary background spanning architectural design, supply chain management, and on-site construction execution.<br><br>
+            My current objective is to leverage this profound engineering foundation to transition into the legal sector, specializing in global construction compliance and dispute resolution.<br><br>
+            Feel free to contact me via email or GitHub.
+        </div>
     </main>
-
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 智能高亮当前房间的菜单
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 2. 跨房间记忆中英文
+            const savedLang = localStorage.getItem('siteLang') || 'zh';
+            const btn = document.getElementById('lang-btn');
+            if (savedLang === 'en') {
+                document.body.classList.remove('lang-zh');
+                document.body.classList.add('lang-en');
+                btn.textContent = '中文';
+            }
+        });
+
         function toggleLanguage() {
             const body = document.body;
             const btn = document.getElementById('lang-btn');
-
             if (body.classList.contains('lang-zh')) {
-                // 切换到英文
-                body.classList.remove('lang-zh');
-                body.classList.add('lang-en');
+                body.classList.replace('lang-zh', 'lang-en');
                 btn.textContent = '中文';
+                localStorage.setItem('siteLang', 'en');
             } else {
-                // 切换到中文
-                body.classList.remove('lang-en');
-                body.classList.add('lang-zh');
+                body.classList.replace('lang-en', 'lang-zh');
                 btn.textContent = 'EN';
+                localStorage.setItem('siteLang', 'zh');
             }
         }
     </script>
