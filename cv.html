@@ -3,49 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jer Z | Architecture & Law</title>
+    <title>朱泽生 | 履历</title>
     <style>
         /* ================= 全局暗黑视觉引擎 ================= */
-        :root { 
-            --bg-color: #121212; 
-            --text-color: #e0e0e0; 
-            --accent-color: #888888; 
-            --border-color: #2a2a2a; 
-            --sidebar-width: 300px; 
-        }
+        :root { --bg-color: #121212; --text-color: #e0e0e0; --accent-color: #888888; --border-color: #2a2a2a; --sidebar-width: 300px; }
         html { scroll-behavior: smooth; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s; }
         
-        /* 双语控制系统 */
         body.lang-zh .en-only { display: none !important; }
         body.lang-en .zh-only { display: none !important; }
 
-        /* 顶部导航 (暗黑适配) */
         .top-nav { position: fixed; top: 0; right: 0; left: 0; height: 60px; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); display: flex; justify-content: flex-end; align-items: center; padding: 0 40px; z-index: 9999; }
         .nav-links a { text-decoration: none; color: var(--text-color); font-size: 14px; font-weight: 500; margin-left: 25px; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: #ffffff; border-bottom: 2px solid #ffffff; padding-bottom: 4px; }
-        
-        /* 切换按钮反转为白色 */
         .lang-toggle { background: #ffffff; color: #000000; border: none; padding: 6px 15px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; margin-left: 30px; transition: opacity 0.2s; }
         .lang-toggle:hover { opacity: 0.8; }
 
-        /* 左侧名片 */
         .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
         .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #333333; margin-bottom: 25px; object-fit: cover; }
-        .sidebar h1 { font-size: 26px; margin: 0 0 10px; color: #ffffff; letter-spacing: -0.5px;}
-        .sidebar .role { font-size: 14px; color: var(--accent-color); margin-bottom: 20px; font-weight: 500; }
-        .sidebar .bio-text { font-size: 13.5px; color: var(--accent-color); margin-bottom: 35px; text-align: justify; }
-        .contact-info { font-size: 13px; }
-        .contact-info div { margin-bottom: 10px; }
-        .contact-info a { color: var(--text-color); text-decoration: none; border-bottom: 1px solid var(--border-color); transition: color 0.2s; }
-        .contact-info a:hover { color: #ffffff; border-color: #ffffff; }
-
-        /* 右侧展陈区 */
-        .main-content { margin-left: var(--sidebar-width); padding: 100px 60px 80px 60px; max-width: 800px; }
         
-        /* 内部排版通用件 (暗黑适配) */
+        /* 新增：左侧目录专属样式 */
+        .toc-title { font-size: 12px; font-weight: 700; color: #666; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .toc-list { list-style: none; padding: 0; margin: 0; font-size: 13.5px; line-height: 2.2; }
+        .toc-list a { color: var(--text-color); text-decoration: none; transition: color 0.2s; display: block; }
+        .toc-list a:hover { color: #ffffff; }
+
+        .main-content { margin-left: var(--sidebar-width); padding: 100px 60px 80px 60px; max-width: 800px; }
         .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888888; margin: 0 0 35px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
-        .intro-text { font-size: 16px; line-height: 1.8; margin-bottom: 40px; color: #cccccc; }
+        
+        /* 锚点防遮挡 */
+        .content-block { margin-bottom: 60px; scroll-margin-top: 80px; }
+        
         .timeline-item { margin-bottom: 45px; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
         .item-title { font-weight: 600; font-size: 16px; color: #ffffff; }
@@ -53,36 +41,25 @@
         .item-role { font-size: 14px; color: var(--accent-color); font-style: italic; margin-bottom: 12px; }
         .item-desc { font-size: 14.5px; color: #cccccc; }
         .item-desc ul { padding-left: 18px; margin-top: 8px; margin-bottom: 0; }
-        
-        /* 项目画廊 (暗黑适配) */
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px; }
-        .project-card { border: 1px solid var(--border-color); text-decoration: none; color: inherit; transition: transform 0.2s ease, box-shadow 0.2s ease; display: block; background: #1a1a1a; }
-        .project-card:hover { transform: translateY(-4px); box-shadow: 0 4px 20px rgba(0,0,0,0.5); border-color: #444444; }
-        .project-img { width: 100%; height: 220px; object-fit: cover; background: #222222; display: block; border-bottom: 1px solid var(--border-color); }
-        .project-info { padding: 16px; }
-        .project-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: #ffffff; }
-        .project-tag { font-size: 12.5px; color: var(--accent-color); }
 
-        /* 移动端适配 */
         @media (max-width: 900px) {
             .sidebar { position: relative; width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 90px 30px 40px; }
             .main-content { margin-left: 0; padding: 50px 30px; }
-            .project-grid { grid-template-columns: 1fr; }
         }
     </style>
-    </head>
+</head>
 <body class="lang-zh">
 
     <nav class="top-nav">
         <div class="nav-links">
             <a href="index.html" class="zh-only">主页</a>
-            <a href="cv.html" class="zh-only">履历</a>
+            <a href="cv.html" class="zh-only active">履历</a>
             <a href="projects.html" class="zh-only">项目</a>
             <a href="misc.html" class="zh-only">杂项</a>
             <a href="support.html" class="zh-only">技术支持</a>
             
             <a href="index.html" class="en-only">Home</a>
-            <a href="cv.html" class="en-only">CV</a>
+            <a href="cv.html" class="en-only active">CV</a>
             <a href="projects.html" class="en-only">Projects</a>
             <a href="misc.html" class="en-only">Misc</a>
             <a href="support.html" class="en-only">Support</a>
@@ -93,57 +70,86 @@
 
     <aside class="sidebar">
         <img src="assets/images/avatar.jpg" alt="Avatar" class="avatar" onerror="this.style.display='none'">
-        <h1>Jer Z</h1>
-        <div class="role zh-only">建筑设计师 / 准建筑律师</div>
-        <div class="role en-only">Architectural Designer / Future Lawyer</div>
-        <div class="bio-text zh-only">倾向于将建筑视为战略性的思辨工具，围绕系统性结构、海岸系统与废弃基础设施展开探索。</div>
-        <div class="bio-text en-only">Viewing architecture as a strategic tool, exploring systematic structures, coastal systems, and abandoned infrastructure.</div>
-        <div class="contact-info">
-            <div>📍 Hangzhou, China</div>
-            <div>✉️ <a href="mailto:jeremyzhuzs@outlook.com">Email</a></div>
-            <div>🔗 <a href="https://github.com/JeremyZHUzs" target="_blank">GitHub</a></div>
-        </div>
+        <h1 class="zh-only" style="font-size: 20px; margin: 0 0 5px 0; color: #ffffff;">朱泽生</h1>
+        <h1 class="en-only" style="font-size: 20px; margin: 0 0 5px 0; color: #ffffff;">Jeremy ZHU</h1>
+
+        <div class="toc-title zh-only">履历目录</div>
+        <div class="toc-title en-only">CV Contents</div>
+
+        <ul class="toc-list zh-only">
+            <li><a href="#timeline">01. 工作时间线</a></li>
+            <li><a href="#certs">02. 证书与资质</a></li>
+        </ul>
+        <ul class="toc-list en-only">
+            <li><a href="#timeline">01. Work Timeline</a></li>
+            <li><a href="#certs">02. Certificates</a></li>
+        </ul>
     </aside>
 
-   <main class="main-content">
-        <h2 class="section-title zh-only">工作经历</h2>
-        <h2 class="section-title en-only">Experience</h2>
+    <main class="main-content">
+        
+        <div id="timeline" class="content-block">
+            <h2 class="section-title zh-only">01. 工作时间线</h2>
+            <h2 class="section-title en-only">01. Work Timeline</h2>
 
-        <div class="timeline-item">
-            <div class="item-header"><span class="item-title">dasso (大庄) | Hangzhou</span><span class="item-date">2026.04 - Present</span></div>
-            <div class="item-role zh-only">建筑建材上游管理</div>
-            <div class="item-role en-only">Upstream Building Materials Management</div>
-            <div class="item-desc zh-only">负责建材上游板块的业务跟进、结构研发统筹与体系管理。</div>
-            <div class="item-desc en-only">Deeply involved in R&D and supply chain management.</div>
+            <div class="timeline-item">
+                <div class="item-header"><span class="item-title">dasso (大庄) | Hangzhou</span><span class="item-date">2026.04 - Present</span></div>
+                <div class="item-role zh-only">建筑建材上游管理</div>
+                <div class="item-role en-only">Upstream Building Materials Management</div>
+                <div class="item-desc zh-only">负责建材上游板块的业务跟进、结构研发统筹与体系管理。</div>
+                <div class="item-desc en-only">Deeply involved in R&D and supply chain management.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="item-header"><span class="item-title zh-only">温州肯恩大学 校建部</span><span class="item-title en-only">WKU | Construction Dept.</span></div>
+                <div class="item-role zh-only">建筑甲方项目管理</div>
+                <div class="item-role en-only">Client-Side Project Management</div>
+                <div class="item-desc zh-only">代表业主方利益协调设计需求与施工落地。</div>
+                <div class="item-desc en-only">Coordinated campus construction projects representing the client's interests.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="item-header"><span class="item-title zh-only">浙江舜江集团</span><span class="item-title en-only">Zhejiang Shunjian Group</span></div>
+                <div class="item-role zh-only">施工现场管理</div>
+                <div class="item-role en-only">On-Site Construction Management</div>
+                <div class="item-desc zh-only">驻扎义乌西江悦别墅区工程前线，掌握现场实测实量规范。</div>
+                <div class="item-desc en-only">Acquiring robust front-line operational experience at Yiwu Xijiangyue.</div>
+            </div>
         </div>
 
-        <div class="timeline-item">
-            <div class="item-header"><span class="item-title zh-only">温州肯恩大学 校建部</span><span class="item-title en-only">WKU | Construction Dept.</span></div>
-            <div class="item-role zh-only">建筑甲方项目管理</div>
-            <div class="item-role en-only">Client-Side Project Management</div>
-            <div class="item-desc zh-only">代表业主方利益协调设计需求与施工落地。</div>
-            <div class="item-desc en-only">Coordinated campus construction projects representing the client's interests.</div>
+        <div id="certs" class="content-block">
+            <h2 class="section-title zh-only">02. 证书与资质</h2>
+            <h2 class="section-title en-only">02. Certificates</h2>
+
+            <div class="timeline-item">
+                <div class="item-header"><span class="item-title zh-only">NAAB 国际认证学位</span><span class="item-title en-only">NAAB Accredited Degree</span></div>
+                <div class="item-role zh-only">温州肯恩大学 - 建筑学硕士 (M.Arch)</div>
+                <div class="item-role en-only">Wenzhou-Kean University - Master of Architecture</div>
+                <div class="item-desc zh-only">完成 6 年完整建筑学教育，学位获美国国家建筑认证委员会认可。</div>
+                <div class="item-desc en-only">Degree formally accredited by the National Architectural Accrediting Board.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="item-header"><span class="item-title zh-only">执业资格筹备 (进行中)</span><span class="item-title en-only">Professional Licenses (In Progress)</span></div>
+                <div class="item-desc zh-only">
+                    <ul>
+                        <li>工程类：二级/一级建造师、二级/一级注册建筑师。</li>
+                        <li>法律类：锚定 2029 年 10 月法律职业资格考试。</li>
+                    </ul>
+                </div>
+                <div class="item-desc en-only">
+                    <ul>
+                        <li>Engineering: Constructor & Registered Architect exams.</li>
+                        <li>Legal: Target National Legal Profession Exam in Oct 2029.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="timeline-item">
-            <div class="item-header"><span class="item-title zh-only">浙江舜江集团</span><span class="item-title en-only">Zhejiang Shunjian Group</span></div>
-            <div class="item-role zh-only">施工现场管理</div>
-            <div class="item-role en-only">On-Site Construction Management</div>
-            <div class="item-desc zh-only">驻扎义乌西江悦别墅区工程前线，掌握现场实测实量规范。</div>
-            <div class="item-desc en-only">Acquiring robust front-line operational experience at Yiwu Xijiangyue.</div>
-        </div>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. 智能高亮当前房间的菜单
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-
-            // 2. 跨房间记忆中英文
             const savedLang = localStorage.getItem('siteLang') || 'zh';
             const btn = document.getElementById('lang-btn');
             if (savedLang === 'en') {
