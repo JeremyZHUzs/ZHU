@@ -30,7 +30,24 @@
 
         /* 左侧名片 */
         .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width); padding: 100px 40px 40px; border-right: 1px solid var(--border-color); overflow-y: auto; box-sizing: border-box; }
-        .avatar { width: 85px; height: 85px; border-radius: 50%; background-color: #333333; margin-bottom: 25px; object-fit: cover; border: 1px solid var(--border-color); }
+        /* ================= 头像：更大、方形圆边 ================= */
+        .avatar { 
+            width: 180px;         /* 1. 放大一些：从 85px 增加到 180px */
+            height: 180px;        /* 保持 1:1 比例 */
+            
+            /* 2. 方形圆边：将 50% (圆形) 改为具体的像素值 (圆角) */
+            border-radius: 15px;  /* 获得精致的圆角效果 */
+
+            object-fit: cover;    /* 确保照片不拉伸 */
+            border: 1px solid var(--border-color);
+            background-color: #333333; /* 备用色 */
+            
+            /* 居中显示较大头像 */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 25px; /* 下方留白保持不变 */
+        }
         .sidebar h1 { font-size: 26px; margin: 0 0 10px; color: #ffffff; letter-spacing: -0.5px;}
         .sidebar .role { font-size: 14px; color: var(--accent-color); margin-bottom: 20px; font-weight: 500; }
         .sidebar .bio-text { font-size: 13.5px; color: var(--accent-color); margin-bottom: 35px; text-align: justify; }
